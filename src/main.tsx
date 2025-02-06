@@ -5,9 +5,12 @@ import App from './App.tsx'
 import {
   createBrowserRouter,
   RouterProvider,
-  //RouteObject
 } from "react-router-dom";
 import ErrorPage from './error.tsx';
+import { MyContextProvider } from './ctx/Provider.tsx'; // Import the context provider
+import LoginPage from './LoginPage.tsx'; // Import the login page
+import Home from './Home.tsx';
+
 
 const fourOhFour = new Response("", {
   status: 404,
@@ -17,16 +20,20 @@ const fourOhFour = new Response("", {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
     // App should never throw err
     children: [
       {
-        // loads errorElement in <App />'s <Outlet />
+        // loads errorElement in <Home />'s <Outlet />
         errorElement: <ErrorPage />,
         children: [
           {
             index: true,
-            element: <App />
+            element: <LoginPage />
+          },
+          {
+            path: "app",
+            element: <App /> // Add the login page route
           },
           {
             // throw 404 for all unspecified routes
@@ -41,6 +48,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <MyContextProvider> {/* Wrap the RouterProvider with MyContextProvider */}
+      <RouterProvider router={router} />
+    </MyContextProvider>
   </StrictMode>,
 )

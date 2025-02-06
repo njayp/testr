@@ -1,14 +1,14 @@
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
-    const error: any = useRouteError();
-    console.error(error);
+    const err = useRouteError() as { status?: number; statusText?: string; message?: string };
+    console.error(err);
 
     return (
         <div id="error-page">
             <p>React router has encountered an error.</p>
             <p>
-                <i>{error.status && `${error.status}: `}{error.statusText || error.message}</i>
+                <i>{err.status && `${err.status}: `}{err.statusText || err.message}</i>
             </p>
             <img src={"/fof.png"} alt="404 dragon" />
         </div>

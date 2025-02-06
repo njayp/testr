@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Outlet } from 'react-router-dom'
+import { MyContext } from './ctx/MyContext.tsx' // Import the context
 
 function App() {
   const [count, setCount] = useState(0)
+  const { username } = useContext(MyContext) // Use the context
 
   return (
     <>
@@ -19,6 +21,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+        <p>Welcome, {username}</p> {/* Display the username */}
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
