@@ -10,7 +10,7 @@ import ErrorPage from './error.tsx';
 import { MyContextProvider } from './ctx/Provider.tsx'; // Import the context provider
 import LoginPage from './LoginPage.tsx'; // Import the login page
 import Home from './Home.tsx';
-
+import ChecklistPage from './checklist/ChecklistPage.tsx'; // Import the checklist page
 
 const fourOhFour = new Response("", {
   status: 404,
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: "app",
             element: <App /> // Add the login page route
+          },
+          {
+            path: "list",
+            element: <ChecklistPage /> // Add the checklist page route
           },
           {
             // throw 404 for all unspecified routes
