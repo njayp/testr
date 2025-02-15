@@ -1,7 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,6 +12,7 @@ import ChecklistPage from './checklist/ChecklistPage.tsx'; // Import the checkli
 import { DefaultChecklist } from './checklist/models.ts';
 import CardGrid from './cards/CardGrid.tsx';
 import { DefaultCardGridItems } from './cards/models.ts';
+import TicTacToe from './ttt/ttt.tsx';
 
 const fourOhFour = new Response("", {
   status: 404,
@@ -35,12 +34,12 @@ const router = createBrowserRouter([
             element: <LoginPage />
           },
           {
-            path: "app",
-            element: <App /> // Add the login page route
-          },
-          {
             path: "list",
             element: <ChecklistPage items={DefaultChecklist} /> // Add the checklist page route
+          },
+          {
+            path: "ttt",
+            element: <TicTacToe /> // Add the checklist page route
           },
           {
             path: "card",

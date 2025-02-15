@@ -16,10 +16,16 @@ const CardItem = ({ title, description, Icon }: CardItemProps): JSX.Element => {
 
 
     return (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 275, }}>
             <CardActionArea
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
+                onClick={() => setHovered(!hovered)}
+                sx={{
+                    width: "100%",
+                    height: "100%",
+                    minHeight: 275
+                }}
             >
                 <CardContent>
                     <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
@@ -50,7 +56,6 @@ const CardItem = ({ title, description, Icon }: CardItemProps): JSX.Element => {
                         }} />
                         {description}
                     </Stack>
-
                 </Box>
             </CardActionArea>
         </Card>

@@ -1,13 +1,19 @@
 import Header from './Header.tsx';
-import { Box, Divider } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
+import { useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 
 export default function Home() {
+    useEffect(() => {
+        // ensure no margin on body
+        document.body.style.margin = '0';
+    }, []);
+
     return (
-        <Box height="100vh" width="100vw" display="flex" flexDirection="column">
+        <Stack height="100vh" bgcolor={"#242424"} color="white">
             <Header />
             <Divider />
             <Outlet />
-        </Box>
+        </Stack>
     )
 }

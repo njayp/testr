@@ -1,21 +1,20 @@
+import { Grid2 } from "@mui/material";
 import CardItem, { CardItemProps } from "./CardItem";
 
 
 export interface CardGridProps {
-    cards: CardItemProps[][]; // 2D array of CardItemProps
+    cards: CardItemProps[]; // 2D array of CardItemProps
 }
 
 const CardGrid = ({ cards }: CardGridProps): JSX.Element => {
     return (
-        <div>
-            {cards.map((row, i) => (
-                <div key={i} style={{ display: "flex", gap: "1rem" }}>
-                    {row.map((card, j) => (
-                        <CardItem key={j} {...card} />
-                    ))}
-                </div>
+        <Grid2 container spacing={2} direction={"row"}>
+            {cards.map((card, i) => (
+                <Grid2 key={i} size={4}>
+                    <CardItem  {...card} />
+                </Grid2>
             ))}
-        </div>
+        </Grid2>
     );
 };
 

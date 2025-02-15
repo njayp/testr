@@ -1,7 +1,7 @@
 import { AddReaction, EmojiEmotions, Face, Face2, Face3, Face4, Face5, Face6, FaceRetouchingNatural } from "@mui/icons-material";
 import { CardItemProps } from "./CardItem";
 
-export const DefaultCardGridItems: CardItemProps[][] = [[
+export const DefaultCardGridItems: CardItemProps[] = [
     {
         title: "Card 1",
         description: "Description 1",
@@ -17,7 +17,6 @@ export const DefaultCardGridItems: CardItemProps[][] = [[
         description: "Description 3",
         Icon: Face3,
     },
-], [
     {
         title: "Card 4",
         description: "Description 4",
@@ -33,7 +32,6 @@ export const DefaultCardGridItems: CardItemProps[][] = [[
         description: "Description 6",
         Icon: Face6,
     },
-], [
     {
         title: "Card 7",
         description: "Description 7",
@@ -49,4 +47,4 @@ export const DefaultCardGridItems: CardItemProps[][] = [[
         description: "Description 9",
         Icon: EmojiEmotions,
     },
-]]
+];

@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
@@ -5,12 +6,12 @@ export default function ErrorPage() {
     console.error(err);
 
     return (
-        <div id="error-page">
+        <Box m="auto">
             <p>React router has encountered an error.</p>
             <p>
                 <i>{err.status && `${err.status}: `}{err.statusText || err.message}</i>
             </p>
             <img src={"/fof.png"} alt="404 dragon" />
-        </div>
+        </Box>
     );
 }
