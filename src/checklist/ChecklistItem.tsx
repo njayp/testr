@@ -1,16 +1,22 @@
 import Checkbox from '@mui/material/Checkbox';
 import { Box, FormControlLabel } from '@mui/material';
-import { Item } from './types';
+import { Item } from './models';
 
-const ChecklistItem = (item: Item, setParentChecked: (checked: boolean) => void, triggerRefresh: () => void): JSX.Element => {
-    const setSelfAndParentChecked = (checked: boolean) => {
-        item.checked = checked
-        setParentChecked(checked);
+interface ChecklistItemProps {
+    item: Item;
+    recursiveParentCheck: () => void;
+    triggerRefresh: () => void;
+}
+
+const ChecklistItem = ({ item, recursiveParentCheck, triggerRefresh }: ChecklistItemProps): JSX.Element => {
+    const selfAndParentCheck = () => {
+        item.checked = true
+        recursiveParentCheck();
     }
 
-    const setSelfAndChildrenChecked = (checked: boolean) => {
+    const recursiveChildUncheck = () => {
         const checkSelfAndChildren = (item: Item): void => {
-            item.checked = checked
+            item.checked = false
             item.children?.forEach(child => {
                 checkSelfAndChildren(child)
             })
@@ -27,14 +33,18 @@ const ChecklistItem = (item: Item, setParentChecked: (checked: boolean) => void,
                 onChange={(event) => {
                     const checked = event.target.checked
                     if (checked) {
-                        setSelfAndParentChecked(checked)
+                        selfAndParentCheck()
                     } else {
-                        setSelfAndChildrenChecked(checked)
+                        recursiveChildUncheck()
                     }
                 }}
             />} label={item.text} />
             <Box textAlign="left" ml={2}>
-                {item.children?.map(child => ChecklistItem(child, setSelfAndParentChecked, triggerRefresh))}
+                {item.children?.map(item => ChecklistItem({
+                    item,
+                    triggerRefresh,
+                    recursiveParentCheck: selfAndParentCheck,
+                }))}
             </Box>
         </>
     );

@@ -11,6 +11,9 @@ import { MyContextProvider } from './ctx/Provider.tsx'; // Import the context pr
 import LoginPage from './LoginPage.tsx'; // Import the login page
 import Home from './Home.tsx';
 import ChecklistPage from './checklist/ChecklistPage.tsx'; // Import the checklist page
+import { DefaultChecklist } from './checklist/models.ts';
+import CardGrid from './cards/CardGrid.tsx';
+import { DefaultCardGridItems } from './cards/models.ts';
 
 const fourOhFour = new Response("", {
   status: 404,
@@ -37,7 +40,11 @@ const router = createBrowserRouter([
           },
           {
             path: "list",
-            element: <ChecklistPage /> // Add the checklist page route
+            element: <ChecklistPage items={DefaultChecklist} /> // Add the checklist page route
+          },
+          {
+            path: "card",
+            element: <CardGrid cards={DefaultCardGridItems} /> // Add the checklist page route
           },
           {
             // throw 404 for all unspecified routes
