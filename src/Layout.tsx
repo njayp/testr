@@ -5,12 +5,15 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
     useEffect(() => {
-        // ensure no margin on body
-        document.body.style.margin = '0';
+        // set body style
+        const style = document.body.style
+        style.margin = '0';
+        style.backgroundColor = "#242424";
+        style.color = "white";
     }, []);
 
     return (
-        <Stack height="100vh" bgcolor="#242424" color="white">
+        <Stack>
             <Header />
             <Divider />
             <Outlet />

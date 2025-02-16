@@ -12,5 +12,13 @@ export const Routes: Route[] = [
     {
         name: "Cards",
         path: "/card",
-    }
+    },
+    {
+        name: "Pokemon",
+        path: "/poke",
+    },
+    {
+        name: "Socket",
+        path: "/sock",
+    },
 ];

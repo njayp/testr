@@ -12,15 +12,15 @@ export interface CardItemProps {
 }
 
 const CardItem = ({ title, description, Icon }: CardItemProps): JSX.Element => {
-    const [hovered, setHovered] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(false);
 
 
     return (
         <Card sx={{ minWidth: 275, }}>
             <CardActionArea
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                onClick={() => setHovered(!hovered)}
+                onMouseEnter={() => setExpanded(true)}
+                onMouseLeave={() => setExpanded(false)}
+                onClick={() => setExpanded(!expanded)}
                 sx={{
                     width: "100%",
                     height: "100%",
@@ -38,7 +38,7 @@ const CardItem = ({ title, description, Icon }: CardItemProps): JSX.Element => {
                     bottom: 0,
                     left: 0,
                     width: "100%",
-                    height: hovered ? "100%" : "30px",
+                    height: expanded ? "100%" : "30px",
                     backgroundColor: "primary.main",
                     display: "flex",
                     alignItems: "top",
@@ -52,7 +52,7 @@ const CardItem = ({ title, description, Icon }: CardItemProps): JSX.Element => {
                         <ExpandLess sx={{
                             fontSize: 32,
                             transition: "transform 0.3s ease-in-out",
-                            transform: hovered ? "rotate(180deg)" : "rotate(0deg)",
+                            transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
                         }} />
                         {description}
                     </Stack>

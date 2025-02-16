@@ -1,10 +1,10 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MyContext } from './ctx/MyContext.tsx';
 import reactLogo from './assets/react.svg'
 import { Stack, Typography } from '@mui/material';
+import { MyContext } from './ctx/MyContext';
 
-const LoginPage = () => {
+const Login = () => {
     const [inputUsername, setInputUsername] = useState('');
     const { setUsername } = useContext(MyContext);
     const navigate = useNavigate();
@@ -36,4 +36,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default Login;
