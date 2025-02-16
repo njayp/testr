@@ -7,12 +7,14 @@ import {
 import ErrorPage from './error.tsx';
 import { MyContextProvider } from './ctx/Provider.tsx'; // Import the context provider
 import LoginPage from './LoginPage.tsx'; // Import the login page
-import Home from './Home.tsx';
 import ChecklistPage from './checklist/ChecklistPage.tsx'; // Import the checklist page
 import { DefaultChecklist } from './checklist/models.ts';
 import CardGrid from './cards/CardGrid.tsx';
 import { DefaultCardGridItems } from './cards/models.ts';
 import TicTacToe from './ttt/ttt.tsx';
+import Layout from './Layout.tsx';
+import Home from './home/Home.tsx';
+import { Routes } from './home/models.ts';
 
 const fourOhFour = new Response("", {
   status: 404,
@@ -22,7 +24,7 @@ const fourOhFour = new Response("", {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Layout />,
     // App should never throw err
     children: [
       {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <LoginPage />
+          },
+          {
+            path: "home",
+            element: <Home routes={Routes} />
           },
           {
             path: "list",
@@ -58,7 +64,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <MyContextProvider> {/* Wrap the RouterProvider with MyContextProvider */}
+    <MyContextProvider>
       <RouterProvider router={router} />
     </MyContextProvider>
   </StrictMode>,

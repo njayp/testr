@@ -11,7 +11,7 @@ const LoginPage = () => {
 
     const handleLogin = () => {
         setUsername(inputUsername);
-        navigate('/ttt');
+        navigate('/home');
     };
 
     return (
