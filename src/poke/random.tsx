@@ -1,7 +1,7 @@
 import { Check, Close } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowSelectionModel, GridToolbar } from '@mui/x-data-grid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Poke {
     name: string;
@@ -26,6 +26,8 @@ interface Move {
     type: {
         name: string;
     };
+    // id for DataGrid
+    id: string;
 }
 
 const RandomPoke = () => {
@@ -34,23 +36,31 @@ const RandomPoke = () => {
     const [loading, setLoading] = useState(false);
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
+    // log selected rows
+    useEffect(() => {
+        console.log(rowSelectionModel);
+    }, [rowSelectionModel]);
+
     const fetchRandomPoke = async () => {
         setLoading(true);
 
         // get poke
         const randomId = Math.floor(Math.random() * 1025) + 1;
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
-        const data = await response.json() as Poke;
+        const poke = await response.json() as Poke;
+        poke.name = poke.name[0].toUpperCase() + poke.name.slice(1);
 
         // get moves
-        const moves = await Promise.all(data.moves.map(async (move) => {
+        const moves = await Promise.all(poke.moves.map(async (move) => {
             const response = await fetch(move.move.url);
             const data = await response.json() as Move;
+            // set id for DataGrid
+            data.id = data.name;
             return data;
         }));
 
         // set state
-        setPoke(data);
+        setPoke(poke);
         setMoves(moves);
         setLoading(false);
     };
@@ -63,19 +73,20 @@ const RandomPoke = () => {
         { field: 'name', width: 300, headerName: 'Move' },
         { field: 'type', width: 200, valueGetter: (_, row) => row.type.name, headerName: 'Type' },
         {
-            field: 'match', width: 100, headerName: 'Type Match', align: "center", renderCell: (params) => typeMatch(params.row.type.name) ?
+            field: 'stab', width: 100, headerName: 'STAB', align: "center", headerAlign: "center",
+            renderCell: (params) => typeMatch(params.row.type.name) ?
                 <Check sx={{ color: "green" }} /> :
                 <Close sx={{ color: "red" }} />
         }
     ]
 
     return (
-        <Stack spacing={1} margin="auto">
+        <Stack spacing={0} margin="auto">
             <Button onClick={fetchRandomPoke} variant='outlined'>Random Pokemon</Button>
             {poke && (
                 <>
                     <Stack alignItems={"center"} direction="row" spacing={2}>
-                        <Typography variant='h2'>{poke.name}</Typography>
+                        <Typography variant='h3'>{poke.name}</Typography>
                         <Box>
                             <img src={poke.sprites.front_default} alt={poke.name} />
                         </Box>

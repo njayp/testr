@@ -18,6 +18,7 @@ import { Routes } from './home/models.ts';
 import RandomPoke from './poke/random.tsx';
 import EchoSocket from './socket/echo.tsx';
 import { createTheme, ThemeProvider } from '@mui/material';
+import StonksSocket from './socket/stonks.tsx';
 
 const fourOhFour = new Response("", {
   status: 404,
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
           {
             path: "sock",
             element: <EchoSocket />
+          },
+          {
+            path: "stonks",
+            element: <StonksSocket />
           },
           {
             // throw 404 for all unspecified routes

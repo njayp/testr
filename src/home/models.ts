@@ -21,4 +21,8 @@ export const Routes: Route[] = [
         name: "Socket",
         path: "/sock",
     },
+    {
+        name: "Stonks",
+        path: "/stonks",
+    },
 ];
