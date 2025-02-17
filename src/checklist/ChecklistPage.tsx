@@ -11,7 +11,6 @@ const ChecklistPage = ({ items: defaultItems }: ChecklistPageProps) => {
     const [items, setItems] = useState(defaultItems);
 
     const triggerRefresh = () => {
-        console.log(items);
         setItems([...items]);
     }
 

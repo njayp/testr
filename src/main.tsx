@@ -79,6 +79,7 @@ const theme = createTheme({
       secondary: '#757575', // Secondary text color (grey)
     },
   },
+  components: {},
 });
 
 createRoot(document.getElementById('root')!).render(
